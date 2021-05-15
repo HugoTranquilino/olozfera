@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // datatable
     $('#example').DataTable({
         responsive: true,
         dom: 'lrtip',
@@ -7,6 +8,7 @@ $(document).ready(function () {
         "info": false
     });
 
+    // validacion email
     var correo_electronico = {
         rules: {
             correo: {
@@ -16,8 +18,8 @@ $(document).ready(function () {
         },
         messages: {
             correo: {
-                required: "Por favor ingrese su correo electronico",
-                email: "Favor de verificar el correo electronico ingresado"
+                required: "Por favor ingrese su correo electrónico",
+                email: "Favor de verificar el correo electrónico ingresado"
             }
         }
     }
@@ -25,7 +27,16 @@ $(document).ready(function () {
     $("#enviar").click(function (e) {
         $("#contacto").validate(correo_electronico);
         if ($("#contacto").valid()) {
-            alert('todo bien ')
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Tú información ha sido guardada',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            $(this).attr("disabled", "disabled");
+            $("#enviar").css('background', '#f6f6f6');
+            $("#enviar").css('color', 'black');
         }
     })
 });
